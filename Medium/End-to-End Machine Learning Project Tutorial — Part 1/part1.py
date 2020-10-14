@@ -28,3 +28,5 @@ data['Origin'].value_counts()
 # plot for correlation
 sns.pairplot(data[["MPG", "Cylinders", "Displacement", 'Weight', 'Horsepower']],
              diag_kind="kde")
+
+nico = {"age": 44}
