@@ -8,3 +8,6 @@ scipy~=1.5.2
 mglearn~=0.1.9
 cycler~=0.10.0
 yfinance~=0.1.54
+requests~=2.24.0
+beautifulsoup4~=4.9.3
+Flask~=1.1.2
