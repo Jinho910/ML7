@@ -13,7 +13,9 @@ from flask import Flask, render_template, request, redirect, send_file
 from bs4 import BeautifulSoup
 from stack_overflow import get_job as so_job
 from wework import get_job as ww_job
+from remoteok import get_job as rw_job
 from save import save_to_file
+
 
 db = {}
 
@@ -24,14 +26,13 @@ app = Flask("remote_job")
 def remote_job():
     word = request.args.get('word')
     word = word.lower()
-    job_num = 0
     # jobs=[{'title': "full-stack develop", 'company': "air bnb", 'link': "daum.net"}]
     if word in db:
         jobs = db.get(word)
     else:
-        jobs=so_job(word)+ww_job(word)
+        jobs=so_job(word)+ww_job(word)+rw_job(word)
         db[word] = jobs
-        jobs = db.get(word)
+        # jobs = db.get(word)
 
     return render_template("remote_job.html", word=word, job_num=len(jobs), jobs=jobs)
 
