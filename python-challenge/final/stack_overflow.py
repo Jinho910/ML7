@@ -8,8 +8,10 @@ def get_job(word):
     html = requests.get(URL,headers=headers)
     soup = BeautifulSoup(html.text, 'html.parser')
     pagination = soup.find('div', {"class": "s-pagination"})
-    pages = pagination.find_all("a")
-    last_page = len(pages) - 1
+    last_page=0
+    if pagination:
+        pages = pagination.find_all("a")
+        last_page = len(pages) - 1
     so_job = []
     for p in range(last_page):
         page_num = p + 1

@@ -11,10 +11,17 @@ def get_job(word):
 
     jobs = soup.find_all("li", {"class": "feature"})
     for job in jobs:
-        link=job.find('a')['href']
+        true_link=""
+        # links=job.find_all('a')['href']
+        links=job.find_all('a')
+        for link in links:
+            if link['href'][:7]=="/remote":
+                true_link=link['href']
+                break
+
         company=job.find('span', {"class":"company"}).string
         title=job.find('span', {"class":"title"}).string
-        ww_job.append({'title':title, "company":company, "link":f"https://weworkremotely.com{link}"})
+        ww_job.append({'title':title, "company":company, "link":f"https://weworkremotely.com{true_link}"})
 
     return ww_job
 

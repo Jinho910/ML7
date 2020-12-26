@@ -1,8 +1,8 @@
 import csv
 
 
-def save_to_file(jobs):
-    file = open('jobs.csv', 'w')
+def save_to_file(fn,jobs):
+    file = open(fn, 'w')
     writer = csv.writer(file)
     writer.writerow(['title', 'company', 'link'])
 

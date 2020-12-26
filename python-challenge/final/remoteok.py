@@ -15,7 +15,12 @@ def get_job(word):
     jobs_board=soup.find('table', {"id":"jobsboard"})
     # jobs_board = soup.find('div', {"class": "container"})
 
-    jobs = jobs_board.find_all("tr", {"class": "job"})
+    jobs={}
+
+    if jobs_board:
+        jobs = jobs_board.find_all("tr", {"class": "job"})
+        # print(type(jobs))
+
     for job in jobs:
         link=job['data-url']
         company=job['data-company']

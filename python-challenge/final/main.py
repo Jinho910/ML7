@@ -7,9 +7,7 @@ https://remoteok.io/remote-dev+python-jobs
 
 Good luck!
 """
-sites=[
-    "stackoverflow","weworkremotely","remoteok"
-]
+
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, request, redirect, send_file
@@ -45,24 +43,27 @@ def remote_job():
 
 @app.route("/")
 def home():
-    return render_template("home.html",sites=sites)
+    return render_template("home.html")
 
 
 @app.route("/export")
 def export():
-    try:
+    # try:
         word = request.args.get('word')
-        if not word:
-            raise Exception()
+    # TDDO c++ 일때 버그 수정할
+        # if not word:
+        #     raise Exception()
         word = word.lower()
         jobs = db.get(word)
-        if not jobs:
-            raise Exception()
-        save_to_file(jobs)
-        return send_file('jobs.csv', as_attachment=True)
-
-    except:
-        return redirect("/")
+        # if not jobs:
+        #     raise Exception()
+        #
+        save_to_file(f'{word}.csv',jobs)
+        return send_file(f'{word}.csv', as_attachment=True)
+        # return "c++"
+    # except:
+    #     # print("exception occured")
+    #     return redirect("/")
 
 
 app.run(host="localhost")
