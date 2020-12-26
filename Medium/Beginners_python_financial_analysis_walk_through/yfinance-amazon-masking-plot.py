@@ -47,5 +47,9 @@ amz.plot(y='Close', rot=90, title='AMZN Close Price')
 # amz.plot(y='Close', kind='scatter', rot=90, title='Amazon close price')
 amz.plot(y="Close", rot=90, kind='hist')
 amz.Close
+amz.columns
+stocks.info()
+#set floating decimal
+pd.options.display.float_format='${:,.2f}'.format
 amz.shape
 type(amz)

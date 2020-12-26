@@ -12,15 +12,15 @@ def get_job(word):
     html = requests.get(URL,headers=headers)
     soup = BeautifulSoup(html.text, 'html.parser')
     rw_job = []
-    # jobs_board=soup.find('table', {"id":"jobsboard"})
-    jobs_board = soup.find('div', {"class": "container"})
+    jobs_board=soup.find('table', {"id":"jobsboard"})
+    # jobs_board = soup.find('div', {"class": "container"})
 
     jobs = jobs_board.find_all("tr", {"class": "job"})
     for job in jobs:
         link=job['data-url']
         company=job['data-company']
         title=job['data-search']
-        rw_job.append({'title':title, "company":company, "link":f"https://weworkremotely.com{link}"})
+        rw_job.append({'title':title, "company":company, "link":f"https://remoteok.io{link}"})
 
     return rw_job
 

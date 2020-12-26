@@ -7,10 +7,12 @@ https://remoteok.io/remote-dev+python-jobs
 
 Good luck!
 """
-
+sites=[
+    "stackoverflow","weworkremotely","remoteok"
+]
 import requests
-from flask import Flask, render_template, request, redirect, send_file
 from bs4 import BeautifulSoup
+from flask import Flask, render_template, request, redirect, send_file
 from stack_overflow import get_job as so_job
 from wework import get_job as ww_job
 from remoteok import get_job as rw_job
@@ -30,7 +32,11 @@ def remote_job():
     if word in db:
         jobs = db.get(word)
     else:
-        jobs=so_job(word)+ww_job(word)+rw_job(word)
+        so_jobs=so_job(word)
+        ww_jobs=ww_job(word)
+        rw_jobs=rw_job(word)
+        # jobs=so_job(word)+ww_job(word)+rw_job(word)
+        jobs=so_jobs+ww_jobs+rw_jobs
         db[word] = jobs
         # jobs = db.get(word)
 
@@ -39,7 +45,7 @@ def remote_job():
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",sites=sites)
 
 
 @app.route("/export")
