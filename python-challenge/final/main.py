@@ -26,17 +26,14 @@ app = Flask("remote_job")
 def remote_job():
     word = request.args.get('word')
     word = word.lower()
-    # jobs=[{'title': "full-stack develop", 'company': "air bnb", 'link': "daum.net"}]
     if word in db:
         jobs = db.get(word)
     else:
         so_jobs=so_job(word)
         ww_jobs=ww_job(word)
         rw_jobs=rw_job(word)
-        # jobs=so_job(word)+ww_job(word)+rw_job(word)
         jobs=so_jobs+ww_jobs+rw_jobs
         db[word] = jobs
-        # jobs = db.get(word)
 
     return render_template("remote_job.html", word=word, job_num=len(jobs), jobs=jobs)
 
@@ -50,7 +47,7 @@ def home():
 def export():
     # try:
         word = request.args.get('word')
-    # TDDO c++ 일때 버그 수정할
+    # TODO c++ 일때 버그 수정할것
         # if not word:
         #     raise Exception()
         word = word.lower()
